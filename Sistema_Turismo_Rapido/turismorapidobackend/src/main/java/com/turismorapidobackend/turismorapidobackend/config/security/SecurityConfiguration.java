@@ -18,11 +18,12 @@ public class SecurityConfiguration {
         http.httpBasic();
         http
         .authorizeHttpRequests()
-        .requestMatchers(HttpMethod.POST, "/clients").permitAll()
         .requestMatchers(HttpMethod.GET, "/clients").hasRole("ADMIN")
         .requestMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
         .anyRequest().authenticated();
+
         http.csrf().disable();
+        http.headers().frameOptions().disable();
         return http.build();
     }
 

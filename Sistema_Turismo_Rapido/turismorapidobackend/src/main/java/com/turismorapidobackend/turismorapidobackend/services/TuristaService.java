@@ -45,13 +45,22 @@ public class TuristaService {
         BeanUtils.copyProperties(turistaRequestDTO, clientRequestDTO);
         Client client = clientRequestDTO.toClient();
 
-        clientRepository.save(client);
+        client = clientRepository.save(client);
 
         Turista turista = new Turista();
-
         turista.setClient(client);
+        turista = turistaRepository.save(turista);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(turistaRepository.save(turista));
+        client.setTurista(turista);
+        clientRepository.save(client);
 
+        TuristaResponseDTO turistaResponseDTO = new TuristaResponseDTO();
+
+        turistaResponseDTO.setId_turista(turista.getId());
+        turistaResponseDTO.setName(client.getName());
+        turistaResponseDTO.setId_client(client.getId_client());
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(turistaResponseDTO);
     }
 }

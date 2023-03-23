@@ -18,4 +18,7 @@ public class TuristaResponseDTO {
         this.id_turista = turista.getId();
         this.name = turista.getClient().getName();
     }
+
+    public TuristaResponseDTO() {
+    }
 }

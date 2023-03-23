@@ -14,6 +14,7 @@ public class Turismologo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     Long cadastroConselho;
 
     @OneToMany(targetEntity = Roteiro.class, mappedBy = "turismologo")
