@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @Entity
@@ -19,9 +21,10 @@ public class Alimentacao {
     String street_district;
     int street_number;
 
-    @ManyToOne(targetEntity = Roteiro.class)
-    @JoinColumn(name = "roteiro_id")
-    Roteiro roteiro;
+    @ManyToMany(targetEntity = Roteiro.class,
+            mappedBy = "alimentacao"
+            )
+    List<Roteiro> roteiros;
 
     public Alimentacao(){
         
